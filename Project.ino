@@ -1,5 +1,49 @@
-#include <AABB.h>
-#include <Point.h>
+class Point {
+  public:
+    int x, y;
+    
+    Point(int _x, int _y)  {
+      x = _x;
+      y = _y;
+    }
+
+    void print() {
+      Serial.print("{x: ");
+      Serial.print(x);
+      Serial.print(", y: ");
+      Serial.print(y);
+      Serial.print(" }");
+    }
+};
+
+class AABB {
+  public:
+    Point center, size;
+
+    AABB(int x, int y, int w, int h) : center(x, y), size(w, h) {}
+
+    static boolean collides(AABB a, AABB b) {
+      if (abs(a.center.x - b.center.x) < a.size.x + b.size.x) {
+        if (abs(a.center.y - b.center.y) < a.size.y + b.size.y) {
+          return true;
+        }
+      }
+
+      return false;
+    }
+
+    void print()  {
+      Serial.print("{ x: ");
+      Serial.print(center.x);
+      Serial.print(", y: ");
+      Serial.print(center.y);
+      Serial.print(", w: ");
+      Serial.print(size.x);
+      Serial.print(", h: ");
+      Serial.print(size.y);
+      Serial.println(" }");
+    }
+};
 
 // PING STUFF
 // VCC  -> +5V
